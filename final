@@ -1,1 +1,99 @@
-hello
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args){
+        Consultation person1 = new Consultation( 7 ,"yuki");
+        person1.sendConfirmation();
+        person1.calculateFee();
+        System.out.println(person1);
+        person1.generateDietPlan();
+    }
+}
+    class Consultation{
+        LocalDate appointmentDate = LocalDate.now();// Store the date
+        double fee = 0 ; // store fee for the consultation
+        int trainerExperience; // year of experience
+        String client; // client name
+
+        Consultation(){
+            this.trainerExperience = 0;
+            this.client = "none";
+        }
+        Consultation(int trainerExperience,String client ){
+            this.trainerExperience = trainerExperience;
+            this.client = client;
+        }
+
+        public void sendConfirmation(){
+            System.out.println("");
+            System.out.println("We have receive your confirmation Dear." + client);
+        }
+
+        public double calculateFee(){
+            if (trainerExperience < 3){
+                fee = 100 * 3;
+            } else if (trainerExperience > 5) {
+                fee = 200 * 5;
+            }else{
+                fee = 150 * trainerExperience;
+            }
+            return fee;
+        }
+
+        public void generateDietPlan(){
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Specific your fitness goal: 1.Weight Loss // 2.Muscle Gain // 3.General Wellness");
+            System.out.println("Select from 1,2 or 3 ");
+            int Goal = Integer.parseInt(scanner.next());
+            System.out.println("Specific your daily activity level: 1.Sedentary // 2.Moderate Activity // 3.Highly Active");
+            System.out.println("Select from 1,2 or 3 ");
+            int Level = Integer.parseInt(scanner.next());
+
+            if(Goal == 1 && Level == 1){
+                System.out.println("Breakfast will be Scrambled eggs");
+                System.out.println("Lunch will be Grilled chicken ");
+                System.out.println("Dinner will be Baked salmon");
+            } else if (Goal == 1 && Level == 2) {
+                System.out.println("Breakfast will be Greek yoghurt");
+                System.out.println("Lunch will be Grilled turkey ");
+                System.out.println("Dinner will be Stir-fried tofu");
+            } else if (Goal == 1 && Level == 3) {
+                System.out.println("Breakfast will be Oatmeal");
+                System.out.println("Lunch will be Grilled chicken ");
+                System.out.println("Dinner will be Grilled fish");
+            } else if (Goal == 2 && Level == 1) {
+                System.out.println("Breakfast will Omelette");
+                System.out.println("Lunch will be Grilled chicken ");
+                System.out.println("Dinner will be Stir-fry beef");
+            } else if (Goal == 2 && Level == 2) {
+                System.out.println("Breakfast will be Peanut butter toast");
+                System.out.println("Lunch will be Turkey and avocado wrap ");
+                System.out.println("Dinner will be Baked chicken");
+            }else if (Goal == 2 && Level == 3) {
+                System.out.println("Breakfast will be Protein pancake");
+                System.out.println("Lunch will be Grilled steak");
+                System.out.println("Dinner will be Roasted salmon");
+            }else if (Goal == 3 && Level == 1) {
+                System.out.println("Breakfast will be Overnight oats");
+                System.out.println("Lunch will be Grilled chicken");
+                System.out.println("Dinner will be Grilled tilapia");
+            }else if (Goal == 3 && Level == 2) {
+                System.out.println("Breakfast will be Whole-grain cereal");
+                System.out.println("Lunch will be Roasted turkey");
+                System.out.println("Dinner will be Grilled shrimp");
+            }else if (Goal == 3 && Level == 3) {
+                System.out.println("Breakfast will be Avocado toast");
+                System.out.println("Lunch will be Grilled salmon");
+                System.out.println("Dinner will be Stir-fry chicken");
+            }
+        }
+        @Override
+        public String toString() {
+            return "\n" + "AppointmentDate = " + appointmentDate + "\n" +
+                   "Fee= " + fee + "\n" +
+                    "TrainerExperience= " + trainerExperience + "\n" +
+                    "Client= " + client + "\n" ;
+        }
+    }
